@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'maven'
+group 'com.winbaoxian.common'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url "http://192.168.180.191:8081/nexus/content/repositories/public" }
+    maven { url "http://192.168.180.191:8081/nexus/content/repositories/snapshots/" }
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.alibaba:fastjson:1.2.45'
+    compile 'org.apache.commons:commons-lang3:3.7'
+    compile 'commons-beanutils:commons-beanutils:1.9.3'
+    compile 'org.apache.commons:commons-text:1.7'
+    compile 'org.freemarker:freemarker:2.3.28'
+    compile 'org.mongodb:mongo-java-driver:3.10.1'
+    compile 'org.jsoup:jsoup:1.12.1'
+    compile 'cn.wanghaomiao:JsoupXpath:2.3.2'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+//支持上传到maven nexus库
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://192.168.180.191:8081/nexus/content/repositories/snapshots/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project {
+                name = project.name
+                packaging = 'jar'
+                description = 'freemarker functions'
+            }
+        }
+    }
+}
