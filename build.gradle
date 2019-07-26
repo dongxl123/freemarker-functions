@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.alibaba:fastjson:1.2.45'
+    compile 'com.alibaba:fastjson:1.2.58'
     compile 'org.apache.commons:commons-lang3:3.7'
     compile 'commons-beanutils:commons-beanutils:1.9.3'
     compile 'org.apache.commons:commons-text:1.7'
