@@ -20,9 +20,8 @@ public class AESFunction implements TemplateMethodModelEx {
 
     /**
      * USAGE
-     * random()
-     *
-     * @return 0-1
+     * aes(key,iv).encrypt(String)
+     * aes(key,iv).decrypt(String)
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
