@@ -24,6 +24,7 @@ dependencies {
     compile 'org.mongodb:mongo-java-driver:3.10.1'
     compile 'org.jsoup:jsoup:1.12.1'
     compile 'cn.wanghaomiao:JsoupXpath:2.3.2'
+    compile 'commons-codec:commons-codec:1.13'
 }
 
 tasks.withType(JavaCompile) {
@@ -33,8 +34,8 @@ tasks.withType(JavaCompile) {
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "http://192.168.180.191:8081/nexus/content/repositories/snapshots/") {
-                authentication(userName: "admin", password: "admin123")
+            repository(url: "https://repo.rdc.aliyun.com/repository/77327-snapshot-eSlStJ/") {
+                authentication(userName: "YqEg7E", password: "kqPhqT56Db")
             }
             pom.project {
                 name = project.name
