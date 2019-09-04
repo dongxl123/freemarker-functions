@@ -7,6 +7,8 @@ import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,12 +51,20 @@ public class UrlExtractFunction implements TemplateMethodModelEx {
             if (parameterParts.length < 1) {
                 return;
             }
-            for (String parameterPart : parameterParts) {
-                String[] ps = StringUtils.split(parameterPart, "=");
-                if (ps.length < 2) {
-                    continue;
+            try {
+                for (String parameterPart : parameterParts) {
+                    String[] ps = StringUtils.split(parameterPart, "=");
+                    if (ps.length < 1) {
+                        continue;
+                    }
+                    if (ps.length < 2) {
+                        parameters.put(ps[0], StringUtils.EMPTY);
+                    } else {
+                        parameters.put(ps[0], URLDecoder.decode(ps[1], "utf-8"));
+                    }
                 }
-                parameters.put(StringUtils.trim(ps[0]), StringUtils.trim(ps[1]));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
             }
         }
 
