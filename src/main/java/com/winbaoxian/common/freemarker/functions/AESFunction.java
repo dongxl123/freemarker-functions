@@ -6,6 +6,8 @@ import freemarker.template.TemplateModelException;
 import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -36,7 +38,8 @@ public class AESFunction implements TemplateMethodModelEx {
 
     public static class AES {
 
-        private final static String CHARSET_NAME = "UTF-8";
+        private static final Logger log = LoggerFactory.getLogger(AES.class);
+        private static final String CHARSET_NAME = "UTF-8";
         private String key;
         private String iv;
 
@@ -59,7 +62,7 @@ public class AESFunction implements TemplateMethodModelEx {
                 byte[] encryped = cipher.doFinal(dataBytes);
                 return Base64.encodeBase64String(encryped);
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("aes encrypt error", e);
             }
             return null;
         }
@@ -75,7 +78,7 @@ public class AESFunction implements TemplateMethodModelEx {
                 byte[] original = cipher.doFinal(encryp);
                 return new String(original);
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("aes decrypt error", e);
             }
             return null;
         }

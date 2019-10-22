@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class GenerateIdNumFunction implements TemplateMethodModelEx {
 
-    public static final Map<String, Integer> areaCode = new HashMap();
+    private static final Map<String, Integer> areaCode = new HashMap();
 
     static {
         areaCode.put("北京市", Integer.valueOf(110000));
@@ -3564,13 +3564,13 @@ public class GenerateIdNumFunction implements TemplateMethodModelEx {
 
         StringBuilder builder = new StringBuilder();
         builder.append(birthday.get(1));
-        long month = birthday.get(2) + 1;
-        if (month < 10L) {
+        int month = birthday.get(2) + 1;
+        if (month < 10) {
             builder.append("0");
         }
         builder.append(month);
-        long date = birthday.get(5);
-        if (date < 10L) {
+        int date = birthday.get(5);
+        if (date < 10) {
             builder.append("0");
         }
         builder.append(date);
@@ -3591,7 +3591,6 @@ public class GenerateIdNumFunction implements TemplateMethodModelEx {
     }
 
     private String randomCode(String sex) {
-        String threeCode = "";
         char[] male = {'1', '3', '5', '7', '9'};
         char[] female = {'2', '4', '6', '8', '0'};
         char sexChar;
@@ -3609,7 +3608,7 @@ public class GenerateIdNumFunction implements TemplateMethodModelEx {
 
     @Override
     public Object exec(List list) throws TemplateModelException {
-        String birthday = null;
+        String birthday = StringUtils.EMPTY;
         String sex = null;
         if (CollectionUtils.isNotEmpty(list)) {
             birthday = ((SimpleScalar) list.get(0)).getAsString();

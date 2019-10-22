@@ -3,6 +3,8 @@ package com.winbaoxian.common.freemarker.functions;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModelException;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
  * @date 2019-8-20 18:05:20
  */
 public class Md5Function implements TemplateMethodModelEx {
+
+    private static final Logger log = LoggerFactory.getLogger(Md5Function.class);
 
     /**
      * USAGE
@@ -28,7 +32,7 @@ public class Md5Function implements TemplateMethodModelEx {
             try {
                 return DigestUtils.md5Hex(data);
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("Md5.md5Hex error", e);
             }
             return null;
         }

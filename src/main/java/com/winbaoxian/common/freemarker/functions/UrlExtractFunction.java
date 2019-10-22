@@ -6,6 +6,8 @@ import freemarker.template.TemplateModelException;
 import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -14,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class UrlExtractFunction implements TemplateMethodModelEx {
+
+    private static final Logger log = LoggerFactory.getLogger(UrlExtractFunction.class);
 
     /**
      * USAGE
@@ -64,7 +68,7 @@ public class UrlExtractFunction implements TemplateMethodModelEx {
                     }
                 }
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                log.error("UrlExtractor异常", e);
             }
         }
 

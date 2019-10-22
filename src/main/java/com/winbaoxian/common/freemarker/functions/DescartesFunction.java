@@ -8,6 +8,8 @@ import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
 import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,6 +26,8 @@ import java.util.Map;
  */
 @SuppressWarnings("unchecked")
 public class DescartesFunction implements TemplateMethodModelEx {
+
+    private static final Logger log = LoggerFactory.getLogger(DescartesFunction.class);
 
     /**
      * USAGE
@@ -107,7 +111,7 @@ public class DescartesFunction implements TemplateMethodModelEx {
             ObjectInputStream ois = new ObjectInputStream(bais);
             return (T) ois.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("deepClone error", e);
             return null;
         }
     }
