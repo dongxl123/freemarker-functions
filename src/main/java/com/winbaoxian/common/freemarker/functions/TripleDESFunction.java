@@ -25,10 +25,10 @@ public class TripleDESFunction implements TemplateMethodModelEx {
 
     /**
      * USAGE
-     * trippleDES(key,iv).encrypt(String)
-     * trippleDES(key,iv).decrypt(String)
-     * trippleDES(key).encrypt(String)
-     * trippleDES(key).decrypt(String)
+     * tripleDES(key,iv).encrypt(String)
+     * tripleDES(key,iv).decrypt(String)
+     * tripleDES(key).encrypt(String)
+     * tripleDES(key).decrypt(String)
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
