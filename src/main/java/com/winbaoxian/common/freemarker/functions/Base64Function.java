@@ -16,8 +16,8 @@ public class Base64Function implements TemplateMethodModelEx {
 
     /**
      * USAGE
-     * aes(key,iv).encrypt(String)
-     * aes(key,iv).decrypt(String)
+     * base64().encode(String)
+     * base64().decode(String)
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
