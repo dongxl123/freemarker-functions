@@ -3,19 +3,19 @@
 
 ##常用案例
 1. 字符串转json对象
-    > jsonStr = "{\"info\":\"字符串转json对象\"}" 
+    > jsonStr = "{\\"info\\":\\"字符串转json对象\\"}" 
     - 字符串转json对象 | ${toJSON(jsonStr)} 或 ${jsonStr?eval}
     - ${jsonStr} | 输出：{"info":"字符串转json对象"}
     - 取info数据 | ${toJSON(jsonStr).info} | 输出：字符串转json对象   
 
 2. json对象转字符串
     > jsonObj = JSONObject({"info":"json对象转字符串"})
-    - json对象转字符串 | ${toJSONString(jsonObj)} | 输出: {"info":"json对象转字符串"}
+    - json对象转字符串 | ${toJSONString(jsonObj)} | 输出: `{"info":"json对象转字符串"}
     - 取info数据 | ${jsonObj.info} | 输出：json对象转字符串
   
 3. 字符串转义
     > jsonObj = JSONObject({"info":"字符串转义"})
-    - 字符串转义 | ${toJSONString(jsonObj)?js_string} | 输出：{\"info\":\"字符串转json对象\"}
+    - 字符串转义 | ${toJSONString(jsonObj)?js_string} | 输出：{\\"info\":\\"字符串转json对象\\"}
 
 4. 时间
     - 当前时间(2019-11-18 15:02:53) | ${.now}  
@@ -31,7 +31,7 @@
     
 6. 根据当前时间获取日期
     > year：年, date：日， 支持正、负整数
-    - ${makeDateByDelta(year, date)} | 输出: 1988-02-11\
+    - ${makeDateByDelta(year, date)} | 输出: 1988-02-11
     
 7. 生成数字列表
     > ${range(start, end)}, start: 开始，end:结束, 支持整数，返回list对象
