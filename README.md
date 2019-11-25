@@ -86,3 +86,7 @@
     ```
     - <#list premiumSettings as o><#if o.jobType=='010000'>${o.addPremiumPerPersonOriginal}</#if></#list> | 输出：189
     - <#list premiumSettings as o>${jobType}<#if o_has_next>,</#if></#list> | 输出：010000,100000
+ 
+14. list截取
+    > list = [1,2,3,4,5,6]
+    - 截取前3个数据 | ${toJSONString(list[0..2])} | 输出：[1,2,3]
