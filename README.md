@@ -101,3 +101,7 @@
     ```
     - 提取a.1000的值 | ${a['1000']} | 输出: 1000Value
     - 提取1b的值 | ${.vars['1b]} | 输出: 1bValue
+ 
+16. JsonPath提取数据
+    > jsonObj = JSONObject({"data":{"info":"JsonPath提取数据"}})
+    - 提取info的值 | ${jsonPathExtract(data, '$.info')} | 输出: JsonPath提取数据 
