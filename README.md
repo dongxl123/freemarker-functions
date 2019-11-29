@@ -37,6 +37,7 @@
     > ${range(start, end)}, start: 开始，end:结束, 支持整数，返回list对象
     - ${range(1, 4)} [1,2,3,4], 该返回值是list对象，无法直接输出
     - ${toJSONString(range(1, 4))} | 输出: [1,2,3,4]   
+    - ${toJSONString(1..4)} | 输出: [1,2,3,4]  
 
 8. URL参数提取
     > url = "http://www.baidu.com/getData?searchKey=freeMarker"
@@ -90,3 +91,13 @@
 14. list截取
     > list = [1,2,3,4,5,6]
     - 截取前3个数据 | ${toJSONString(list[0..2])} | 输出：[1,2,3]
+    
+15. 从json对象中提取key为数字或数字开头的值
+    ```json
+     {
+        "a":{"1000":"1000Value"},
+        "1b": "1bValue"
+    }
+    ```
+    - 提取a.1000的值 | ${a['1000']} | 输出: 1000Value
+    - 提取1b的值 | ${.vars['1b]} | 输出: 1bValue
