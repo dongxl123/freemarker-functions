@@ -1,7 +1,7 @@
 package com.winbaoxian.common.freemarker.functions;
 
 import com.alibaba.fastjson.JSON;
-import com.winbaoxian.common.freemarker.functions.utils.JsonUtils;
+import com.winbaoxian.common.freemarker.utils.JsonUtils;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
