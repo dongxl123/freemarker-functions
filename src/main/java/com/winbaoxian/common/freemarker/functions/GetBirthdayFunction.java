@@ -1,5 +1,6 @@
 package com.winbaoxian.common.freemarker.functions;
 
+import freemarker.template.SimpleNumber;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
@@ -25,7 +26,7 @@ public class GetBirthdayFunction implements TemplateMethodModelEx {
         if (CollectionUtils.isEmpty(list) || list.size() < 1) {
             return null;
         }
-        Integer age = (Integer) DeepUnwrap.unwrap((TemplateModel) list.get(0));
+        Integer age = ((SimpleNumber) list.get(0)).getAsNumber().intValue();
         Date date = DateUtils.addMonths(DateUtils.addYears(new Date(), -age), -3);
         return DateFormatUtils.format(date, "yyyy-MM-dd");
     }
