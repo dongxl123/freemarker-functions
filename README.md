@@ -11,6 +11,12 @@
 2. json对象转字符串
     > jsonObj = JSONObject({"info":"json对象转字符串"})
     - json对象转字符串 | ${toJSONString(jsonObj)} | 输出: {"info":"json对象转字符串"}
+    - json对象转字符串（格式化输出） | toJSONString({"a":1,"b":2}, 1) | 输出: 
+     ```json
+       {
+           "info":"json对象转字符串"
+       }
+     ```
     - 取info数据 | ${jsonObj.info} | 输出：json对象转字符串
   
 3. 字符串转义
