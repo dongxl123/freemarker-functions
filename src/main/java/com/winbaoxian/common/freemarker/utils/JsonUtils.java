@@ -45,6 +45,10 @@ public enum JsonUtils {
         return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
     }
 
+    public String toNormalJSONString(Object o) {
+        return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue);
+    }
+
     private class WinTestNGValueFilter implements ValueFilter {
 
         @Override

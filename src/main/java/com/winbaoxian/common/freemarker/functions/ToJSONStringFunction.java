@@ -26,7 +26,7 @@ public class ToJSONStringFunction implements TemplateMethodModelEx {
     public Object exec(List list) throws TemplateModelException {
         if (CollectionUtils.isNotEmpty(list)) {
             Object model = list.get(0);
-            return JsonUtils.INSTANCE.toJSONString(DeepUnwrap.unwrap((TemplateModel) model));
+            return JsonUtils.INSTANCE.toNormalJSONString(DeepUnwrap.unwrap((TemplateModel) model));
         }
         return null;
     }
