@@ -19,8 +19,8 @@ public class ToJSONStringFunction implements TemplateMethodModelEx {
     /**
      * 返回json string
      * USAGE
-     * toJSONString({"a":1,"b":2})
-     * toJSONString({"a":1,"b":2}, isPretty)
+     * toPrettyJSONString({"a":1,"b":2})
+     * toPrettyJSONString({"a":1,"b":2}, isPretty)
      *
      * @return "{\"a\":1,\"b\":2}"
      */
@@ -33,9 +33,9 @@ public class ToJSONStringFunction implements TemplateMethodModelEx {
                 isPretty = ((SimpleNumber) list.get(1)).getAsNumber().intValue() > 0;
             }
             if(isPretty){
-                return JsonUtils.INSTANCE.toJSONString(DeepUnwrap.unwrap((TemplateModel) model));
+                return JsonUtils.INSTANCE.toPrettyJSONString(DeepUnwrap.unwrap((TemplateModel) model));
             }
-            return JsonUtils.INSTANCE.toNormalJSONString(DeepUnwrap.unwrap((TemplateModel) model));
+            return JsonUtils.INSTANCE.toJSONString(DeepUnwrap.unwrap((TemplateModel) model));
         }
         return null;
     }

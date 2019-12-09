@@ -42,11 +42,11 @@ public enum JsonUtils {
     }
 
     public String toJSONString(Object o) {
-        return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
+        return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue);
     }
 
-    public String toNormalJSONString(Object o) {
-        return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue);
+    public String toPrettyJSONString(Object o) {
+        return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
     }
 
     private class WinTestNGValueFilter implements ValueFilter {
