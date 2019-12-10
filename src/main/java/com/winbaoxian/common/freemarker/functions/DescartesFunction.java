@@ -15,10 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author dongxuanliang252
@@ -55,10 +52,16 @@ public class DescartesFunction implements TemplateMethodModelEx {
         if (o == null) {
             return;
         } else if (o instanceof List) {
-            map.put(alias, new JSONArray((List<Object>) o));
+            if (CollectionUtils.isEmpty((List) o)) {
+                return;
+            }else {
+                map.put(alias, new JSONArray((List<Object>) o));
+            }
         } else if (o instanceof String) {
             Object jsonRet = JsonUtils.INSTANCE.parseObject((String) o);
-            if (jsonRet instanceof String) {
+            if (jsonRet == null) {
+                return;
+            }else if (jsonRet instanceof String) {
                 JSONArray array = new JSONArray();
                 array.add(o);
                 map.put(alias, array);
