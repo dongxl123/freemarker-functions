@@ -1,8 +1,7 @@
 package com.winbaoxian.common.freemarker.functions;
 
-import freemarker.template.SimpleScalar;
-import freemarker.template.TemplateMethodModelEx;
-import freemarker.template.TemplateModelException;
+import freemarker.template.*;
+import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -3614,7 +3613,8 @@ public class GenerateIdNumFunction implements TemplateMethodModelEx {
         if (CollectionUtils.isNotEmpty(list)) {
             birthday = ((SimpleScalar) list.get(0)).getAsString();
             if (list.size() > 1) {
-                sex = ((SimpleScalar) list.get(1)).getAsString();
+                Object o = DeepUnwrap.unwrap((TemplateModel) list.get(1));
+                sex = o.toString();
             }
         }
         StringBuilder generater = new StringBuilder();
