@@ -1,13 +1,11 @@
 package com.winbaoxian.common.freemarker.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.serializer.ValueFilter;
+import com.alibaba.fastjson.serializer.ToStringSerializer;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.bson.types.ObjectId;
-
-import java.util.Date;
 
 /**
  * @author dongxuanliang252
@@ -22,7 +20,11 @@ public enum JsonUtils {
     private final static String OPEN_BRACKET = "[";
     private final static String CLOSE_BRACKET = "]";
 
-    private final String JSON_DATE_FORMAT_PATTERN = "'date'(yyyy-MM-dd HH:mm:ss.S)";
+    private final static SerializeConfig config = new SerializeConfig();
+
+    static {
+        config.put(ObjectId.class, ToStringSerializer.instance);
+    }
 
     public Object parseObject(String text) {
         if (StringUtils.isBlank(text)) {
@@ -41,25 +43,16 @@ public enum JsonUtils {
         return text;
     }
 
+    public Object toJSON(Object javaObject) {
+        return JSON.parse(toJSONString(javaObject));
+    }
+
     public String toJSONString(Object o) {
-        return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue);
+        return JSON.toJSONString(o, config, SerializerFeature.WriteMapNullValue);
     }
 
     public String toPrettyJSONString(Object o) {
-        return JSON.toJSONString(o, new JsonUtils.WinTestNGValueFilter(), SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
-    }
-
-    private class WinTestNGValueFilter implements ValueFilter {
-
-        @Override
-        public Object process(Object o, String filedName, Object filedValue) {
-            if (filedValue instanceof ObjectId) {
-                return ((ObjectId) filedValue).toString();
-            } else if (filedValue instanceof Date) {
-                return DateFormatUtils.format((Date) filedValue, JSON_DATE_FORMAT_PATTERN);
-            }
-            return filedValue;
-        }
+        return JSON.toJSONString(o, config, SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
     }
 
 }
