@@ -1,5 +1,6 @@
 package com.winbaoxian.common.freemarker.functions;
 
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
@@ -20,8 +21,8 @@ public class JsoupXpathFunction implements TemplateMethodModelEx {
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if (CollectionUtils.isEmpty(list) || list.size() < 1) {
-            return null;
+        if (CollectionUtils.isEmpty(list)) {
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
         String content = (String) DeepUnwrap.unwrap((TemplateModel) list.get(0));
         JXDocument document = JXDocument.create(content);

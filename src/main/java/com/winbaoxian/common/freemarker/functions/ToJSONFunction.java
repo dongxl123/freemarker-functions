@@ -1,6 +1,7 @@
 package com.winbaoxian.common.freemarker.functions;
 
 import com.alibaba.fastjson.JSON;
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import com.winbaoxian.common.freemarker.utils.JsonUtils;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
@@ -25,15 +26,15 @@ public class ToJSONFunction implements TemplateMethodModelEx {
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if (CollectionUtils.isNotEmpty(list)) {
-            Object model = list.get(0);
-            Object o = DeepUnwrap.unwrap((TemplateModel) model);
-            if (o instanceof String) {
-                return JsonUtils.INSTANCE.parseObject((String) o);
-            } else {
-                return JSON.toJSON(o);
-            }
+        if (CollectionUtils.isEmpty(list)) {
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
-        return null;
+        Object model = list.get(0);
+        Object o = DeepUnwrap.unwrap((TemplateModel) model);
+        if (o instanceof String) {
+            return JsonUtils.INSTANCE.parseObject((String) o);
+        } else {
+            return JSON.toJSON(o);
+        }
     }
 }

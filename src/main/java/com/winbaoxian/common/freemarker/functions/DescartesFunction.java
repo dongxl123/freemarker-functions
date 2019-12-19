@@ -2,6 +2,7 @@ package com.winbaoxian.common.freemarker.functions;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import com.winbaoxian.common.freemarker.utils.JsonUtils;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
@@ -36,7 +37,7 @@ public class DescartesFunction implements TemplateMethodModelEx {
     @Override
     public Object exec(List list) throws TemplateModelException {
         if (CollectionUtils.isEmpty(list) || list.size() % 2 != 0) {
-            return null;
+            throw new TemplateModelException(TemplateMethodModelExMsg.ERROR_PARAMETER_FORMAT);
         }
         Map<String, JSONArray> map = new LinkedHashMap<>();
         for (int i = 0; i < list.size(); i = i + 2) {
@@ -54,14 +55,14 @@ public class DescartesFunction implements TemplateMethodModelEx {
         } else if (o instanceof List) {
             if (CollectionUtils.isEmpty((List) o)) {
                 return;
-            }else {
+            } else {
                 map.put(alias, new JSONArray((List<Object>) o));
             }
         } else if (o instanceof String) {
             Object jsonRet = JsonUtils.INSTANCE.parseObject((String) o);
             if (jsonRet == null) {
                 return;
-            }else if (jsonRet instanceof String) {
+            } else if (jsonRet instanceof String) {
                 JSONArray array = new JSONArray();
                 array.add(o);
                 map.put(alias, array);

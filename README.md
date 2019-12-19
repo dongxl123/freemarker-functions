@@ -112,3 +112,10 @@
 16. JsonPath提取数据
     > jsonObj = JSONObject({"data":{"info":"JsonPath提取数据"}})
     - 提取info的值 | ${jsonPathExtract(data, '$.info')} | 输出: JsonPath提取数据 
+
+17. 数字四舍五入
+    > a = 1.225
+    - 保留2位小数（四合五入）, 使用freemarker内置函数 | ${a?string('0.##;;roundingMode=halfUp')} | 输出: 1.23
+    - 保留2位小数（四合五入）, 使用自定义函数 | ${round(a,2)} | 输出: 1.23
+    - 取整（四合五入）, 使用freemarker内置函数 | ${a?round} 或 ${a?string('#;;roundingMode=halfUp')  | 输出: 1
+    - 取整（四合五入）, 使用自定义函数 | ${round(a)} | 输出: 1

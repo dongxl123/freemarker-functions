@@ -1,10 +1,9 @@
 package com.winbaoxian.common.freemarker.functions;
 
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import freemarker.template.SimpleNumber;
 import freemarker.template.TemplateMethodModelEx;
-import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
-import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -23,8 +22,8 @@ public class GetBirthdayFunction implements TemplateMethodModelEx {
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if (CollectionUtils.isEmpty(list) || list.size() < 1) {
-            return null;
+        if (CollectionUtils.isEmpty(list)) {
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
         Integer age = ((SimpleNumber) list.get(0)).getAsNumber().intValue();
         Date date = DateUtils.addMonths(DateUtils.addYears(new Date(), -age), -3);

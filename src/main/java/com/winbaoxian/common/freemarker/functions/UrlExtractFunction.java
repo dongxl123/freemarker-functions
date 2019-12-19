@@ -1,5 +1,6 @@
 package com.winbaoxian.common.freemarker.functions;
 
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
@@ -30,11 +31,11 @@ public class UrlExtractFunction implements TemplateMethodModelEx {
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if (CollectionUtils.isNotEmpty(list)) {
-            String urlStr = (String) DeepUnwrap.unwrap((TemplateModel) list.get(0));
-            return new UrlExtractor(urlStr);
+        if (CollectionUtils.isEmpty(list)) {
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
-        return null;
+        String urlStr = (String) DeepUnwrap.unwrap((TemplateModel) list.get(0));
+        return new UrlExtractor(urlStr);
     }
 
     public static class UrlExtractor {

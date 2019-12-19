@@ -1,6 +1,7 @@
 package com.winbaoxian.common.freemarker.functions;
 
 import com.alibaba.fastjson.JSONArray;
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import com.winbaoxian.common.freemarker.utils.JsonUtils;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
@@ -32,7 +33,7 @@ public class ListByKeyFunction implements TemplateMethodModelEx {
     @Override
     public Object exec(List list) throws TemplateModelException {
         if (CollectionUtils.isEmpty(list) || list.size() < 2) {
-            return null;
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
         String sep = DEFAULT_SEPARATOR;
         Object content = DeepUnwrap.unwrap((TemplateModel) list.get(0));

@@ -2,6 +2,7 @@ package com.winbaoxian.common.freemarker.functions;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONPath;
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
@@ -22,7 +23,7 @@ public class JsonPathExtractFunction implements TemplateMethodModelEx {
     @Override
     public Object exec(List list) throws TemplateModelException {
         if (CollectionUtils.isEmpty(list) || list.size() < 2) {
-            return null;
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
         Object content = DeepUnwrap.unwrap((TemplateModel) list.get(0));
         String path = (String) DeepUnwrap.unwrap((TemplateModel) list.get(1));

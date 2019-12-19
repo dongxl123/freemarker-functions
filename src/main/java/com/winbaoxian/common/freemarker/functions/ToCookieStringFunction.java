@@ -1,5 +1,6 @@
 package com.winbaoxian.common.freemarker.functions;
 
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
@@ -29,12 +30,12 @@ public class ToCookieStringFunction implements TemplateMethodModelEx {
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if (CollectionUtils.isNotEmpty(list)) {
-            Object model = list.get(0);
-            Object o = DeepUnwrap.unwrap((TemplateModel) model);
-            return toCookieString(o);
+        if (CollectionUtils.isEmpty(list)) {
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
-        return null;
+        Object model = list.get(0);
+        Object o = DeepUnwrap.unwrap((TemplateModel) model);
+        return toCookieString(o);
     }
 
     private String toCookieString(Object o) {

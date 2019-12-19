@@ -13,7 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author dongxuanliang252
  * @date 2019-03-08 17:01
  * generateIdNum(birthdayString,sexString)
- * generateIdNum("1987-09-12",'1')
+ * generateIdNum("1987-09-12", 1)
+ * generateIdNum()
  * birthdayString 生日，1987-09-12、19870912
  * sexString 性别， 1：男 2：女
  */

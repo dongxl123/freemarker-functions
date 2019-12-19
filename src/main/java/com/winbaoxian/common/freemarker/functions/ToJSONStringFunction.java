@@ -1,5 +1,6 @@
 package com.winbaoxian.common.freemarker.functions;
 
+import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import com.winbaoxian.common.freemarker.utils.JsonUtils;
 import freemarker.template.SimpleNumber;
 import freemarker.template.TemplateMethodModelEx;
@@ -26,17 +27,17 @@ public class ToJSONStringFunction implements TemplateMethodModelEx {
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if (CollectionUtils.isNotEmpty(list)) {
-            Object model = list.get(0);
-            boolean isPretty = false;
-            if (list.size() > 1) {
-                isPretty = ((SimpleNumber) list.get(1)).getAsNumber().intValue() > 0;
-            }
-            if(isPretty){
-                return JsonUtils.INSTANCE.toPrettyJSONString(DeepUnwrap.unwrap((TemplateModel) model));
-            }
-            return JsonUtils.INSTANCE.toJSONString(DeepUnwrap.unwrap((TemplateModel) model));
+        if (CollectionUtils.isEmpty(list)) {
+            throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
-        return null;
+        Object model = list.get(0);
+        boolean isPretty = false;
+        if (list.size() > 1) {
+            isPretty = ((SimpleNumber) list.get(1)).getAsNumber().intValue() > 0;
+        }
+        if (isPretty) {
+            return JsonUtils.INSTANCE.toPrettyJSONString(DeepUnwrap.unwrap((TemplateModel) model));
+        }
+        return JsonUtils.INSTANCE.toJSONString(DeepUnwrap.unwrap((TemplateModel) model));
     }
 }

@@ -3,38 +3,37 @@ package com.winbaoxian.common.freemarker.functions;
 import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import freemarker.template.SimpleNumber;
 import freemarker.template.TemplateMethodModelEx;
-import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
-import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * @author dongxuanliang252
  * @date 2019-03-08 17:26
  */
-public class RepeatFunction implements TemplateMethodModelEx {
+public class RoundFunction implements TemplateMethodModelEx {
 
     /**
-     * 重复N遍
      * USAGE
-     * repeat("s",2)
+     * round(number, scale)
+     * round(number)
      *
-     * @return "ss"
+     * @return number with scale
      */
     @Override
     public Object exec(List list) throws TemplateModelException {
-        if (CollectionUtils.isEmpty(list)) {
+        int scale = 0;
+        if (CollectionUtils.isEmpty(list) || list.size() < 1) {
             throw new TemplateModelException(TemplateMethodModelExMsg.MISSING_PARAMETERS);
         }
-        String baseStr = (String) DeepUnwrap.unwrap((TemplateModel) list.get(0));
-        int count = 1;
+        double value = ((SimpleNumber) list.get(0)).getAsNumber().doubleValue();
         if (list.size() > 1) {
-            count = ((SimpleNumber) list.get(1)).getAsNumber().intValue();
+            scale = ((SimpleNumber) list.get(1)).getAsNumber().intValue();
         }
-        return StringUtils.repeat(baseStr, count);
+        BigDecimal bd = new BigDecimal(value).setScale(scale, BigDecimal.ROUND_HALF_UP);
+        return bd.doubleValue();
     }
 
 }
