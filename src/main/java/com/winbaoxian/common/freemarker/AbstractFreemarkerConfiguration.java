@@ -12,12 +12,6 @@ public abstract class AbstractFreemarkerConfiguration {
     }
 
     /**
-     * 扩展配置
-     * @param configuration
-     */
-    protected abstract void customSettings(Configuration configuration) throws TemplateException;
-
-    /**
      * 通用配置
      * @param configuration
      * @throws TemplateException
@@ -51,6 +45,14 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSharedVariable("jsonPathExtract", new JsonPathExtractFunction());
         configuration.setSharedVariable("listByKey", new ListByKeyFunction());
         configuration.setSharedVariable("round", new RoundFunction());
+    }
+
+    /**
+     * 扩展配置
+     * @param configuration
+     */
+    protected void customSettings(Configuration configuration) throws TemplateException{
+
     }
 
 }
