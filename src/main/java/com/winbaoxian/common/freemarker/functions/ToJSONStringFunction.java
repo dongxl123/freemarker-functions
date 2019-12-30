@@ -2,10 +2,7 @@ package com.winbaoxian.common.freemarker.functions;
 
 import com.winbaoxian.common.freemarker.constant.TemplateMethodModelExMsg;
 import com.winbaoxian.common.freemarker.utils.JsonUtils;
-import freemarker.template.SimpleNumber;
-import freemarker.template.TemplateMethodModelEx;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
+import freemarker.template.*;
 import freemarker.template.utility.DeepUnwrap;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -20,8 +17,8 @@ public class ToJSONStringFunction implements TemplateMethodModelEx {
     /**
      * 返回json string
      * USAGE
-     * toPrettyJSONString({"a":1,"b":2})
-     * toPrettyJSONString({"a":1,"b":2}, isPretty)
+     * toJSONString({"a":1,"b":2})
+     * toJSONString({"a":1,"b":2}, isPretty)
      *
      * @return "{\"a\":1,\"b\":2}"
      */
@@ -35,9 +32,15 @@ public class ToJSONStringFunction implements TemplateMethodModelEx {
         if (list.size() > 1) {
             isPretty = ((SimpleNumber) list.get(1)).getAsNumber().intValue() > 0;
         }
-        if (isPretty) {
-            return JsonUtils.INSTANCE.toPrettyJSONString(DeepUnwrap.unwrap((TemplateModel) model));
+        Object object = model;
+        if (model instanceof SimpleHash) {
+            object = ((SimpleHash) model).toMap();
+        } else {
+            object = DeepUnwrap.unwrap((TemplateModel) model);
         }
-        return JsonUtils.INSTANCE.toJSONString(DeepUnwrap.unwrap((TemplateModel) model));
+        if (isPretty) {
+            return JsonUtils.INSTANCE.toPrettyJSONString(object);
+        }
+        return JsonUtils.INSTANCE.toJSONString(object);
     }
 }
