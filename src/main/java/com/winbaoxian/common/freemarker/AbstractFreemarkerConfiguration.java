@@ -32,6 +32,7 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSharedVariable("extractTagValues", new ExtractTagValuesFunction());
         configuration.setSharedVariable("getBirthday", new GetBirthdayFunction());
         configuration.setSharedVariable("escapeString", new EscapeStringFunction());
+        configuration.setSharedVariable("unEscapeString", new UnEscapeStringFunction());
         configuration.setSharedVariable("jsoup", new JsoupFunction());
         configuration.setSharedVariable("jsoupXpath", new JsoupXpathFunction());
         configuration.setSharedVariable("generateIdNum", new GenerateIdNumFunction());
