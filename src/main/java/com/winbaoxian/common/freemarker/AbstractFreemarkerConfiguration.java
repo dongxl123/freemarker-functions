@@ -7,12 +7,13 @@ import freemarker.template.TemplateException;
 public abstract class AbstractFreemarkerConfiguration {
 
     protected void settings(Configuration configuration) throws TemplateException {
-         commonSettings(configuration);
-         customSettings(configuration);
+        commonSettings(configuration);
+        customSettings(configuration);
     }
 
     /**
      * 通用配置
+     *
      * @param configuration
      * @throws TemplateException
      */
@@ -21,6 +22,7 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSetting(Configuration.DATE_FORMAT_KEY, "yyyy-MM-dd");
         configuration.setSetting(Configuration.TIME_FORMAT_KEY, "HH:mm:ss");
         configuration.setSetting(Configuration.DATETIME_FORMAT_KEY, "yyyy-MM-dd HH:mm:ss");
+        configuration.setSetting(Configuration.URL_ESCAPING_CHARSET_KEY, "ISO-8859-1");
         configuration.setSharedVariable("random", new RandomFunction());
         configuration.setSharedVariable("range", new RangeFunction());
         configuration.setSharedVariable("toJSONString", new ToJSONStringFunction());
@@ -50,9 +52,10 @@ public abstract class AbstractFreemarkerConfiguration {
 
     /**
      * 扩展配置
+     *
      * @param configuration
      */
-    protected void customSettings(Configuration configuration) throws TemplateException{
+    protected void customSettings(Configuration configuration) throws TemplateException {
 
     }
 
