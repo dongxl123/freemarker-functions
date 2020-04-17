@@ -40,6 +40,7 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSharedVariable("generateIdNum", new GenerateIdNumFunction());
         configuration.setSharedVariable("makeDateByDelta", new MakeDateByDeltaFunction());
         configuration.setSharedVariable("aes", new AESFunction());
+        configuration.setSharedVariable("rsa", new RSAFunction());
         configuration.setSharedVariable("base64", new Base64Function());
         configuration.setSharedVariable("md5", new Md5Function());
         configuration.setSharedVariable("hmac", new HmacFunction());
