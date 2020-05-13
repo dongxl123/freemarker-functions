@@ -2,7 +2,6 @@ package com.winbaoxian.common.freemarker.functions;
 
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModelException;
-import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +30,7 @@ public class HmacFunction implements TemplateMethodModelEx {
 
         public String hmacMd5Hex(String key, String data) {
             try {
-                HmacUtils hmac = new HmacUtils(HmacAlgorithms.HMAC_MD5, key);
-                return hmac.hmacHex(data);
+                return HmacUtils.hmacMd5Hex(key, data);
             } catch (Exception e) {
                 log.error("Md5.md5Hex error", e);
             }

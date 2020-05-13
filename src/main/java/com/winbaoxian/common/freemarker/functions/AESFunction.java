@@ -42,6 +42,8 @@ public class AESFunction implements TemplateMethodModelEx {
         private static final Logger log = LoggerFactory.getLogger(AES.class);
         private static final String CHARSET_NAME = "UTF-8";
         private static final String ALGORITHM_AES = "AES";
+        private static final String CIPHER_ALGORITHM = "AES/CBC/PKCS5Padding";
+
         private String key;
         private String iv;
 
@@ -59,7 +61,7 @@ public class AESFunction implements TemplateMethodModelEx {
                 SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(CHARSET_NAME), ALGORITHM_AES);
                 //设置偏移量参数
                 IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
-                Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
                 cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
                 byte[] encryped = cipher.doFinal(dataBytes);
                 return Base64.encodeBase64String(encryped);
@@ -73,7 +75,7 @@ public class AESFunction implements TemplateMethodModelEx {
             try {
                 byte[] ivBytes = iv.getBytes(CHARSET_NAME);
                 byte[] encryp = Base64.decodeBase64(data);
-                Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+                Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
                 SecretKeySpec keySpec = new SecretKeySpec(key.getBytes(CHARSET_NAME), ALGORITHM_AES);
                 IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
                 cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);

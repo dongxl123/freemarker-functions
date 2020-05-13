@@ -24,7 +24,7 @@ dependencies {
     compile 'org.mongodb:mongo-java-driver:3.10.1'
     compile 'org.jsoup:jsoup:1.12.1'
     compile 'cn.wanghaomiao:JsoupXpath:2.3.2'
-    compile 'commons-codec:commons-codec:1.13'
+    compile 'commons-codec:commons-codec:1.10'
 }
 
 tasks.withType(JavaCompile) {
