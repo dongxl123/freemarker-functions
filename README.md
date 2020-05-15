@@ -36,8 +36,10 @@
     - ${getBirthday(age)} | 输出: 1988-02-11
     
 6. 根据当前时间获取日期
-    > year：年, date：日， 支持正、负整数
-    - ${makeDateByDelta(year, date)} | 输出: 1988-02-11
+    > year：年差值, month:月差值，date：日差值， 支持正、负整数
+    - ${getDateByDelta(year)} | 输出: 1988-02-11
+    - ${getDateByDelta(year, month)} | 输出: 1988-02-11
+    - ${getDateByDelta(year, month, date)} | 输出: 1988-02-11
     
 7. 生成数字列表
     > ${range(start, end)}, start: 开始，end:结束, 支持整数，返回list对象

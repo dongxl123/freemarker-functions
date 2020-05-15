@@ -39,6 +39,7 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSharedVariable("jsoupXpath", new JsoupXpathFunction());
         configuration.setSharedVariable("generateIdNum", new GenerateIdNumFunction());
         configuration.setSharedVariable("makeDateByDelta", new MakeDateByDeltaFunction());
+        configuration.setSharedVariable("getDateByDelta", new GetDateByDeltaFunction());
         configuration.setSharedVariable("aes", new AESFunction());
         configuration.setSharedVariable("rsa", new RSAFunction());
         configuration.setSharedVariable("base64", new Base64Function());
