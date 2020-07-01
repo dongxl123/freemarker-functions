@@ -1,11 +1,18 @@
 package com.winbaoxian.common.freemarker.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.ToStringSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
+
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author dongxuanliang252
@@ -54,5 +61,30 @@ public enum JsonUtils {
     public String toPrettyJSONString(Object o) {
         return JSON.toJSONString(o, config, SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
     }
+
+    public Object getSortedJSONObject(Object jo) {
+        if (jo == null) {
+            return null;
+        } else if (jo instanceof String) {
+            return jo;
+        } else if (jo instanceof JSONArray) {
+            JSONArray newJo = new JSONArray();
+            for (Object o : (JSONArray) jo) {
+                newJo.add(getSortedJSONObject(o));
+            }
+            return newJo;
+        } else if (jo instanceof JSONObject) {
+            JSONObject newJo = new JSONObject(true);
+            JSONObject oldJo = (JSONObject) jo;
+            Set<String> sortedKeys = oldJo.keySet().stream().sorted(Comparator.comparing(o -> o)).collect(Collectors.toCollection(LinkedHashSet::new));
+            for (String key : sortedKeys) {
+                newJo.put(key, getSortedJSONObject(oldJo.get(key)));
+            }
+            return newJo;
+        } else {
+            return jo;
+        }
+    }
+
 
 }

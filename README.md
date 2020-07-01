@@ -170,3 +170,7 @@
     - 加密 | ${tripleDES(key).encrypt(data)} | 输出: JzroROdaBZk=
     > data="MTIzNDU2" key="A0PADHTAUGS61U02EDAL5MUN"
     - 解密| ${tripleDES(key).decrypt(data)} | 输出: 123456
+    
+24. signature 特征值函数
+    > data = JSONObject({"info":"json对象特征值"})
+    - 计算特征值 | ${signatrue(info)} | 输出：9aea1a78836d5763cfe13f1d30b48010

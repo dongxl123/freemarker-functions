@@ -30,3 +30,4 @@ catalina*/
 test-output/
 logs/
 cache/
+.scannerwork/

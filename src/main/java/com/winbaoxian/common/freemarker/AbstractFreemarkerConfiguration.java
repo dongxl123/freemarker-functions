@@ -50,6 +50,7 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSharedVariable("jsonPathExtract", new JsonPathExtractFunction());
         configuration.setSharedVariable("listByKey", new ListByKeyFunction());
         configuration.setSharedVariable("round", new RoundFunction());
+        configuration.setSharedVariable("signature", new SignatureFunction());
     }
 
     /**
