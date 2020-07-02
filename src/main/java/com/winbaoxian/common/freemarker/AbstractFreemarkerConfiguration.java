@@ -51,6 +51,11 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSharedVariable("listByKey", new ListByKeyFunction());
         configuration.setSharedVariable("round", new RoundFunction());
         configuration.setSharedVariable("signature", new SignatureFunction());
+        configuration.setSharedVariable("randomNumber", new RandomNumberFunction());
+        configuration.setSharedVariable("randomLetter", new RandomLetterFunction());
+        configuration.setSharedVariable("randomChinese", new RandomChineseFunction());
+        configuration.setSharedVariable("randomName", new RandomNameFunction());
+        configuration.setSharedVariable("randomChar", new RandomCharFunction());
     }
 
     /**

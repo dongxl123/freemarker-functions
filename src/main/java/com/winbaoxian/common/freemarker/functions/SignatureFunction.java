@@ -15,6 +15,12 @@ import java.util.List;
 public class SignatureFunction implements TemplateMethodModelEx {
 
 
+    /**
+     * USAGE
+     * signature(object)
+     *
+     * @return string
+     */
     @Override
     public Object exec(List list) throws TemplateModelException {
         if (CollectionUtils.isEmpty(list)) {

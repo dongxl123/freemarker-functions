@@ -171,6 +171,14 @@
     > data="MTIzNDU2" key="A0PADHTAUGS61U02EDAL5MUN"
     - 解密| ${tripleDES(key).decrypt(data)} | 输出: 123456
     
-24. signature 特征值函数
+25. signature 特征值函数
     > data = JSONObject({"info":"json对象特征值"})
     - 计算特征值 | ${signatrue(info)} | 输出：9aea1a78836d5763cfe13f1d30b48010
+    
+26. 随机字符串
+    - 随机数字 | ${randomNumber(3)} | 输出：123
+    - 随机字母 | ${randomLetter(3)} | 输出：axB
+    - 随机汉字 | ${randomChinese(3)} | 输出：顶是上
+    - 随机字符 | ${randomChar("dfx122我订ABdc单的",3)} | 输出: 单订d
+    - 以上都可以使用长度区间功能 | ${randomNumber(3, 5)} | 输出: 0221   
+    - 随机姓名 | ${randomName()} | 输出：都青荣
