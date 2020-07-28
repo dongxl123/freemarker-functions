@@ -56,6 +56,7 @@ public abstract class AbstractFreemarkerConfiguration {
         configuration.setSharedVariable("randomChinese", new RandomChineseFunction());
         configuration.setSharedVariable("randomName", new RandomNameFunction());
         configuration.setSharedVariable("randomChar", new RandomCharFunction());
+        configuration.setSharedVariable("shuffle", new ShuffleFunction());
     }
 
     /**

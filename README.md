@@ -182,3 +182,6 @@
     - 随机字符 | ${randomChar("dfx122我订ABdc单的",3)} | 输出: 单订d
     - 以上都可以使用长度区间功能 | ${randomNumber(3, 5)} | 输出: 0221   
     - 随机姓名 | ${randomName()} | 输出：都青荣
+27. 洗牌shuffle
+    > list=[1,2,3,4]
+    - 打乱顺序 | ${toJSONString(shuffle(list))} | 输出: [4,5,2,1]
